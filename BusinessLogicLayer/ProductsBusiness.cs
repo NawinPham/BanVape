@@ -1,41 +1,39 @@
-﻿using BusinessLogicLayer;
-using DataAccessLayer;
-using DataModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataModel;
+using DataAccessLayer;
 
 namespace BusinessLogicLayer
 {
-    public class CategorysBusiness : ICategorysBusiness
+    public class ProductsBusiness : IProductsBusiness
     {
-        private ICategorysRepository _res;
-        public CategorysBusiness(ICategorysRepository res)
+        private IProductsRepository _res;
+        public ProductsBusiness(IProductsRepository res)
         {
             _res = res;
         }
-        public List<CategorysModel> getList()
+        public List<ProductsModel> getList()
         {
             return _res.getList();
         }
-        public CategorysModel getDataById(int id)
+        public ProductsModel getDataById(string id)
         {
             return _res.getDataById(id);
         }
-        public bool Create(CategorysModel model)
+        public bool Create(ProductsModel model)
         {
             return _res.Create(model);
         }
-        public bool Update(CategorysModel model)
+        public bool Update(ProductsModel model)
         {
             return _res.Update(model);
         }
-        public CategorysModel Delete(int id)
+        public bool Delete(string id)
         {
             return _res.Delete(id);
         }
-
     }
 }

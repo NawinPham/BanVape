@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Api.BanHang.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -22,14 +23,27 @@ namespace Api.BanHang.Controllers
             var user = _userBusiness.Login(model.Username, model.Password);
             if (user == null)
                 return BadRequest(new { message = "Tài khoản hoặc mật khẩu không đúng!" });
-            return Ok(new { Username = user.username, Email = user.email, Token = user.token });
+            return Ok(new { Username = user.username, Email = user.email, Token = user.token , status = true });
         }
+        [AllowAnonymous]
         [Route("Signup")]
         [HttpPost]
-        public AccountsModel Signup([FromBody] AccountsModel model)
+        public IActionResult Signup([FromBody] AccountsModel model)
         {
-            _userBusiness.Signup(model);
-            return model;
+            var result = _userBusiness.Signup(model);
+            return Ok(new
+            {
+                status = result
+            });
+        }
+        [Route("checkaccount")]
+        [HttpPost]
+        public IActionResult CheckAccount()
+        {
+            return Ok(new
+            {
+                status = true
+            });
         }
 
     }

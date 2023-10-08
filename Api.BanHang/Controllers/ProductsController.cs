@@ -8,63 +8,45 @@ namespace Api.BanHang.Controllers
 {
     [Route("Api/[Controller]")]
     [Controller]
-    public class CategorysController : ControllerBase
+    public class ProductsController : ControllerBase
     {
-        private ICategorysBusiness _categorysBusiness;
-        public CategorysController(ICategorysBusiness categorysBusiness)
+        private IProductsBusiness _productsbusiness;
+        public ProductsController(IProductsBusiness productsBusiness)
         {
-            _categorysBusiness = categorysBusiness;
+            _productsbusiness = productsBusiness;
         }
         [AllowAnonymous]
         [Route("getList")]
         [HttpGet]
-        public List<CategorysModel> getList()
+        public List<ProductsModel> getList()
         {
-            return _categorysBusiness.getList();
-        }
-        [AllowAnonymous]
-        [Route("Get-By-Id/{id}")]
-        [HttpGet]
-        public CategorysModel getDataById(int id)
-        {
-            return _categorysBusiness.getDataById(id);
-        }
-        [Route("Categorys-Create")]
-        [HttpPost]
-        public IActionResult Create([FromBody] CategorysModel model)
-        {
-            var result =  _categorysBusiness.Create(model);
-            if (result)
-            {
-                return Ok(new
-                {
-                    status = true,
-                    message = "thêm thành công",
-                    data = model
-                });
-            }
-            else
-            {
-                return BadRequest(new
-                {
-                    status = false,
-                    message = "thêm thất bại",
-                    data = model
-                });
-            }
+            return _productsbusiness.getList();
             
         }
-        [Route("Caregorys-Update")]
-        [HttpPost]
-        public IActionResult Update([FromBody]CategorysModel model)
+        [AllowAnonymous]
+        [Route("get-by-id/{id}")]
+        [HttpGet]
+        public IActionResult getDataById(string id) 
         {
-            var result = _categorysBusiness.Update(model);
+            var result = _productsbusiness.getDataById(id);
+            return Ok(new
+            {
+                status = result
+            });
+        
+        }
+        [Route("Create-products")]
+        [HttpPost]
+        public IActionResult Create([FromBody] ProductsModel model)
+        {
+            var result = _productsbusiness.Create(model);
             if (result)
             {
                 return Ok(new
                 {
                     status = true,
-                    message = "Cập nhật thành công",
+                    message = "Thêm sản phẩm thành công!",
+                    data = model
                 });
             }
             else
@@ -72,16 +54,39 @@ namespace Api.BanHang.Controllers
                 return BadRequest(new
                 {
                     status = false,
-                    message = "Cập nhật thất bại",
+                    message = "Thêm tài khoản thất bại",
+                    data = model
+                });
+            };
+            
+        }
+        [Route("Update-products")]
+        [HttpPost]
+        public IActionResult Update([FromBody] ProductsModel model)
+        {
+            var result = _productsbusiness.Update(model);
+            if (result)
+            {
+                return Ok(new
+                {
+                    status = true,
+                    message = "Cập nhật thành công!"
                 });
             }
-
+            else
+            {
+                return BadRequest(new
+                {
+                    status = false,
+                    message = "Cập nhật thất bại!"
+                });
+            }
         }
-        [Route("Caregorys-Delete")]
+        [Route("Delete-Products")]
         [HttpPost]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(string id)
         {
-            var result = _categorysBusiness.Delete(id);
+            var result =  _productsbusiness.Delete(id);
             return Ok(new
             {
                 status = result

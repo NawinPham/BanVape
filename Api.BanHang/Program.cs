@@ -12,14 +12,16 @@ builder.Services.AddCors(options =>
 });
 // Add services to the container.
 builder.Services.AddTransient<IDatabaseHelper, DatabaseHelper>();
-builder.Services.AddTransient<IKhachRepository, KhachRepository>();
-builder.Services.AddTransient<IKhachBusiness, KhachBusiness>();
-builder.Services.AddTransient<IHoaDonRepository, HoaDonRepository>();
-builder.Services.AddTransient<IHoaDonBusiness, HoaDonBusiness>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserBusiness, UserBusiness>();
 builder.Services.AddTransient<ICategorysRepository, CategorysRepository>();
 builder.Services.AddTransient<ICategorysBusiness, CategorysBusiness>();
+builder.Services.AddTransient<IProductsRepository, ProductsRepository>();
+builder.Services.AddTransient<IProductsBusiness, ProductsBusiness>();
+builder.Services.AddTransient<IOrdersRepository, OrderRepository>();
+builder.Services.AddTransient<IOrdersBusiness, OrdersBusiness>();
+builder.Services.AddTransient<IOrderDetailsRepository, OrderDetailsRepository>();
+builder.Services.AddTransient<IOrderDetailsBusiness, OrderDetailsBusiness>();
 
 
 // configure strongly typed settings objects

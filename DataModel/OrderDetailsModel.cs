@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    public class Products
+    public class OrderDetailsModel
     {
         public int id { get; set; }
-        public string name { get; set; }
-        public string price { get; set; }
+        public int oder_id { get; set; }
+        public int product_id { get; set; }
         public int quantity { get; set; }
-        public string description { get; set; }
-        public int category_id { get; set; }
     }
-
 }
