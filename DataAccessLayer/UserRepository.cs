@@ -9,6 +9,7 @@ namespace DataAccessLayer
         {
             _dbHelper = dbHelper;
         }
+        
         public AccountsModel Login(string username, string password)
         {
             string msgError = "";
@@ -38,7 +39,7 @@ namespace DataAccessLayer
                     "@fullname", model.fullname,
                     "@address", model.address,
                     "@email", model.email,
-                    "phone", model.phone
+                    "@phone", model.phone
                     );
                 if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
                 {
@@ -51,6 +52,7 @@ namespace DataAccessLayer
                 throw ex;
             }
         }
+        
 
     }
 }
